@@ -17,21 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
 async function initializeDayCounter() {
     try {
         const response = await fetch('/api/day');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         currentDay = data.dayOfYear;
         
         const dayCounterElement = document.getElementById('dayCounter');
-        if (dayCounterElement) {
+        if (dayCounterElement && data.dayOfYear && data.year) {
             dayCounterElement.textContent = `Day ${data.dayOfYear} of ${data.year}`;
         }
     } catch (error) {
         console.error('Error fetching day info:', error);
-        // Fallback calculation
+        // Fallback calculation using JavaScript
         const now = new Date();
-        const start = new Date(now.getFullYear(), 0, 0);
+        const start = new Date(now.getFullYear(), 0, 1); // Jan 1 of current year
         const diff = now - start;
         const oneDay = 1000 * 60 * 60 * 24;
-        const day = Math.floor(diff / oneDay);
+        const day = Math.floor(diff / oneDay) + 1; // +1 because Jan 1 is day 1
         const year = now.getFullYear();
         
         const dayCounterElement = document.getElementById('dayCounter');
@@ -82,12 +87,17 @@ function initializeBorderAnimation() {
 async function loadQuote() {
     try {
         const response = await fetch('/api/quote');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
         const quoteElement = document.getElementById('quote');
         const authorElement = document.getElementById('author');
         
-        if (quoteElement) {
+        if (quoteElement && data.quote) {
             quoteElement.textContent = `"${data.quote}"`;
         }
         

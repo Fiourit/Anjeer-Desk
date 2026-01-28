@@ -197,34 +197,41 @@ class DANA_AI:
         return self.quote_pool[quote_index]
 
 # Initialize DANA AI
-dana_ai = DANA_AI()
+try:
+    dana_ai = DANA_AI()
+    print(f"DANA AI initialized with {len(dana_ai.quote_pool)} quotes")
+except Exception as e:
+    print(f"Error initializing DANA AI: {e}")
+    import traceback
+    traceback.print_exc()
+    dana_ai = None
 
 def get_day_of_year():
     """Get the current day of year (1-365/366)"""
     now = datetime.now()
-    start = datetime(now.year, 1, 1)
-    day_of_year = (now - start).days + 1
+    # Use timetuple().tm_yday which gives day of year (1-366)
+    day_of_year = now.timetuple().tm_yday
     return day_of_year
 
-@app.route('/')
-def index():
-    """Serve main page"""
-    return send_from_directory('public', 'index.html')
-
-@app.route('/about')
-def about():
-    """Serve about page"""
-    return send_from_directory('public', 'about.html')
-
+# API routes must come before static file routes
 @app.route('/api/quote', methods=['GET'])
 def get_quote():
     """Get today's quote from DANA AI"""
     try:
+        if dana_ai is None:
+            return jsonify({
+                "quote": "The present moment is the only time over which we have dominion.",
+                "author": "Thich Nhat Hanh"
+            }), 500
+        
         day_of_year = get_day_of_year()
         quote_data = dana_ai.get_quote_for_day(day_of_year)
+        print(f"Returning quote for day {day_of_year}: {quote_data}")
         return jsonify(quote_data)
     except Exception as e:
         print(f'Error generating quote: {e}')
+        import traceback
+        traceback.print_exc()
         return jsonify({
             "quote": "The present moment is the only time over which we have dominion.",
             "author": "Thich Nhat Hanh"
@@ -243,6 +250,8 @@ def get_day():
         })
     except Exception as e:
         print(f'Error getting day: {e}')
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/health', methods=['GET'])
@@ -250,10 +259,40 @@ def health():
     """Health check endpoint"""
     return jsonify({"status": "ok"})
 
-# Serve static files
+@app.route('/api/test', methods=['GET'])
+def test():
+    """Test endpoint for debugging"""
+    try:
+        day_of_year = get_day_of_year()
+        now = datetime.now()
+        return jsonify({
+            "dayOfYear": day_of_year,
+            "year": now.year,
+            "date": now.strftime("%Y-%m-%d"),
+            "dana_ai_initialized": dana_ai is not None,
+            "quote_pool_size": len(dana_ai.quote_pool) if dana_ai else 0
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Serve main pages
+@app.route('/')
+def index():
+    """Serve main page"""
+    return send_from_directory('public', 'index.html')
+
+@app.route('/about')
+def about():
+    """Serve about page"""
+    return send_from_directory('public', 'about.html')
+
+# Serve static files (CSS, JS, images) - must come last
 @app.route('/<path:path>')
 def serve_static(path):
     """Serve static files from public directory"""
+    # Don't serve API routes as static files
+    if path.startswith('api/'):
+        return jsonify({"error": "Not found"}), 404
     return send_from_directory('public', path)
 
 if __name__ == '__main__':
