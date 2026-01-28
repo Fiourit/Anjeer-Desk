@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeDayCounter();
     initializeBorderAnimation();
     loadQuote();
-    loadMusic();
     initializeNotes();
     initializeSilenceMode();
     checkAcknowledgment();
@@ -112,31 +111,6 @@ async function loadQuote() {
     }
 }
 
-// Load music suggestion for today
-async function loadMusic() {
-    try {
-        const response = await fetch('/api/music');
-        const data = await response.json();
-        
-        const musicTitleElement = document.getElementById('musicTitle');
-        const musicArtistElement = document.getElementById('musicArtist');
-        
-        if (musicTitleElement) {
-            musicTitleElement.textContent = data.title;
-        }
-        
-        if (musicArtistElement) {
-            musicArtistElement.textContent = data.artist;
-        }
-    } catch (error) {
-        console.error('Error loading music:', error);
-        const musicTitleElement = document.getElementById('musicTitle');
-        if (musicTitleElement) {
-            musicTitleElement.textContent = 'Loading...';
-        }
-    }
-}
-
 // Notes - stored in localStorage
 function initializeNotes() {
     const notesElement = document.getElementById('notes');
@@ -164,7 +138,6 @@ function initializeSilenceMode() {
     const silenceToggle = document.getElementById('silenceToggle');
     const contentSection = document.getElementById('contentSection');
     const quoteSection = document.getElementById('quoteSection');
-    const musicSection = document.getElementById('musicSection');
     
     if (!silenceToggle) return;
     
@@ -185,12 +158,10 @@ function initializeSilenceMode() {
         if (isSilent) {
             if (contentSection) contentSection.classList.add('silent');
             if (quoteSection) quoteSection.style.display = 'none';
-            if (musicSection) musicSection.style.display = 'none';
             if (silenceToggle) silenceToggle.textContent = 'Sound';
         } else {
             if (contentSection) contentSection.classList.remove('silent');
             if (quoteSection) quoteSection.style.display = 'block';
-            if (musicSection) musicSection.style.display = 'block';
             if (silenceToggle) silenceToggle.textContent = 'Silence';
         }
     }
