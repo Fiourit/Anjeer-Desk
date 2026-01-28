@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""
+Generate complete data for Anjeer Desk - 365 quotes and 365 music suggestions
+This script creates comprehensive lists with diverse, thoughtful content
+"""
+
+# Comprehensive list of 365 thoughtful quotes from diverse sources
+quotes_data = [
+    # Days 1-50: Foundational wisdom
+    (1, "The quieter you become, the more you can hear.", "Ram Dass"),
+    (2, "In the depth of winter, I finally learned that there was in me an invincible summer.", "Albert Camus"),
+    (3, "The present moment is the only time over which we have dominion.", "Thich Nhat Hanh"),
+    (4, "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "Aristotle"),
+    (5, "The unexamined life is not worth living.", "Socrates"),
+    (6, "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", "Ralph Waldo Emerson"),
+    (7, "It is during our darkest moments that we must focus to see the light.", "Aristotle"),
+    (8, "The only way out is through.", "Robert Frost"),
+    (9, "What lies behind us and what lies before us are tiny matters compared to what lies within us.", "Ralph Waldo Emerson"),
+    (10, "Be yourself; everyone else is already taken.", "Oscar Wilde"),
+    (11, "Two roads diverged in a wood, and I—I took the one less traveled by, and that has made all the difference.", "Robert Frost"),
+    (12, "The mind is everything. What you think you become.", "Buddha"),
+    (13, "Life is what happens to you while you're busy making other plans.", "John Lennon"),
+    (14, "The future belongs to those who believe in the beauty of their dreams.", "Eleanor Roosevelt"),
+    (15, "It is our choices, Harry, that show what we truly are, far more than our abilities.", "J.K. Rowling"),
+    (16, "You must be the change you wish to see in the world.", "Mahatma Gandhi"),
+    (17, "Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do.", "Mark Twain"),
+    (18, "To live is the rarest thing in the world. Most people just exist.", "Oscar Wilde"),
+    (19, "That which does not kill us makes us stronger.", "Friedrich Nietzsche"),
+    (20, "We are all in the gutter, but some of us are looking at the stars.", "Oscar Wilde"),
+    (21, "It is better to be hated for what you are than to be loved for what you are not.", "André Gide"),
+    (22, "The only person you are destined to become is the person you decide to be.", "Ralph Waldo Emerson"),
+    (23, "Go confidently in the direction of your dreams. Live the life you have imagined.", "Henry David Thoreau"),
+    (24, "The greatest glory in living lies not in never falling, but in rising every time we fall.", "Nelson Mandela"),
+    (25, "In the end, we will remember not the words of our enemies, but the silence of our friends.", "Martin Luther King Jr."),
+    (26, "The only impossible journey is the one you never begin.", "Tony Robbins"),
+    (27, "In this life we cannot do great things. We can only do small things with great love.", "Mother Teresa"),
+    (28, "Don't judge each day by the harvest you reap but by the seeds that you plant.", "Robert Louis Stevenson"),
+    (29, "The way to get started is to quit talking and begin doing.", "Walt Disney"),
+    (30, "The real difficulty is to overcome how you think about yourself.", "Maya Angelou"),
+    (31, "If you want to lift yourself up, lift up someone else.", "Booker T. Washington"),
+    (32, "I have not failed. I've just found 10,000 ways that won't work.", "Thomas A. Edison"),
+    (33, "A person who never made a mistake never tried anything new.", "Albert Einstein"),
+    (34, "The person who says it cannot be done should not interrupt the person who is doing it.", "Chinese Proverb"),
+    (35, "There are two ways of spreading light: to be the candle or the mirror that reflects it.", "Edith Wharton"),
+    (36, "The only limit to our realization of tomorrow will be our doubts of today.", "Franklin D. Roosevelt"),
+    (37, "It is never too late to be what you might have been.", "George Eliot"),
+    (38, "You can't use up creativity. The more you use, the more you have.", "Maya Angelou"),
+    (39, "Dream big and dare to fail.", "Norman Vaughan"),
+    (40, "The difference between ordinary and extraordinary is that little extra.", "Jimmy Johnson"),
+    (41, "The best time to plant a tree was 20 years ago. The second best time is now.", "Chinese Proverb"),
+    (42, "Everything you've ever wanted is on the other side of fear.", "George Addair"),
+    (43, "Success is not final, failure is not fatal: it is the courage to continue that counts.", "Winston Churchill"),
+    (44, "Hardships often prepare ordinary people for an extraordinary destiny.", "C.S. Lewis"),
+    (45, "Believe you can and you're halfway there.", "Theodore Roosevelt"),
+    (46, "The only way to do great work is to love what you do.", "Steve Jobs"),
+    (47, "If you can dream it, you can do it.", "Walt Disney"),
+    (48, "The future depends on what you do today.", "Mahatma Gandhi"),
+    (49, "It's not whether you get knocked down, it's whether you get up.", "Vince Lombardi"),
+    (50, "People who are crazy enough to think they can change the world, are the ones who do.", "Rob Siltanen"),
+]
+
+# Comprehensive list of 365 calming music suggestions
+music_data = [
+    # Days 1-50: Classical and ambient favorites
+    (1, "Weightless", "Marconi Union", ""),
+    (2, "Clair de Lune", "Claude Debussy", ""),
+    (3, "Gymnopédie No. 1", "Erik Satie", ""),
+    (4, "Air on the G String", "Johann Sebastian Bach", ""),
+    (5, "Canon in D", "Johann Pachelbel", ""),
+    (6, "The Four Seasons - Spring", "Antonio Vivaldi", ""),
+    (7, "Moonlight Sonata", "Ludwig van Beethoven", ""),
+    (8, "Nocturne in E-flat major", "Frédéric Chopin", ""),
+    (9, "Ave Maria", "Franz Schubert", ""),
+    (10, "Für Elise", "Ludwig van Beethoven", ""),
+    (11, "The Swan", "Camille Saint-Saëns", ""),
+    (12, "Adagio for Strings", "Samuel Barber", ""),
+    (13, "Nimrod", "Edward Elgar", ""),
+    (14, "Prelude in C Major", "Johann Sebastian Bach", ""),
+    (15, "Liebestraum", "Franz Liszt", ""),
+    (16, "Reverie", "Claude Debussy", ""),
+    (17, "The Girl with the Flaxen Hair", "Claude Debussy", ""),
+    (18, "Arabesque No. 1", "Claude Debussy", ""),
+    (19, "Pavane pour une infante défunte", "Maurice Ravel", ""),
+    (20, "Boléro", "Maurice Ravel", ""),
+    (21, "Gymnopédie No. 2", "Erik Satie", ""),
+    (22, "Gymnopédie No. 3", "Erik Satie", ""),
+    (23, "Gnossienne No. 1", "Erik Satie", ""),
+    (24, "Trois Gymnopédies", "Erik Satie", ""),
+    (25, "The Well-Tempered Clavier", "Johann Sebastian Bach", ""),
+    (26, "Goldberg Variations", "Johann Sebastian Bach", ""),
+    (27, "Cello Suite No. 1", "Johann Sebastian Bach", ""),
+    (28, "Brandenburg Concerto No. 3", "Johann Sebastian Bach", ""),
+    (29, "Water Music", "George Frideric Handel", ""),
+    (30, "The Messiah", "George Frideric Handel", ""),
+    (31, "The Four Seasons - Summer", "Antonio Vivaldi", ""),
+    (32, "The Four Seasons - Autumn", "Antonio Vivaldi", ""),
+    (33, "The Four Seasons - Winter", "Antonio Vivaldi", ""),
+    (34, "Symphony No. 6 'Pastoral'", "Ludwig van Beethoven", ""),
+    (35, "Piano Sonata No. 14", "Ludwig van Beethoven", ""),
+    (36, "Symphony No. 9", "Ludwig van Beethoven", ""),
+    (37, "Nocturne in C-sharp minor", "Frédéric Chopin", ""),
+    (38, "Waltz in D-flat major", "Frédéric Chopin", ""),
+    (39, "Prelude in E minor", "Frédéric Chopin", ""),
+    (40, "Ballade No. 1", "Frédéric Chopin", ""),
+    (41, "Impromptu in G-flat major", "Frédéric Chopin", ""),
+    (42, "The Lark Ascending", "Ralph Vaughan Williams", ""),
+    (43, "Fantasia on a Theme", "Ralph Vaughan Williams", ""),
+    (44, "The Planets - Venus", "Gustav Holst", ""),
+    (45, "The Planets - Neptune", "Gustav Holst", ""),
+    (46, "Peer Gynt Suite - Morning Mood", "Edvard Grieg", ""),
+    (47, "Peer Gynt Suite - Anitra's Dance", "Edvard Grieg", ""),
+    (48, "In the Hall of the Mountain King", "Edvard Grieg", ""),
+    (49, "Swan Lake - Scene", "Pyotr Ilyich Tchaikovsky", ""),
+    (50, "The Nutcracker - Waltz of the Flowers", "Pyotr Ilyich Tchaikovsky", ""),
+]
+
+# Note: This is a template. I need to generate all 365 entries.
+# For now, I'll create a script that generates the complete JavaScript file.
+
+print("Generating complete data file...")
+print(f"Quotes: {len(quotes_data)} entries")
+print(f"Music: {len(music_data)} entries")
+print("\nNote: This script needs to be expanded to include all 365 entries for both quotes and music.")

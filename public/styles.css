@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #faf9f6;
+    --text-color: #2c2c2c;
+    --border-color: #7a6b5a;
+    --accent-color: #8b7355;
+    --light-accent: #e8e3dc;
+    --font-serif: 'Crimson Text', serif;
+    --font-sans: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.border-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.border-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 8px solid var(--border-color);
+    border-radius: 24px;
+    box-sizing: border-box;
+    transition: border-width 0.3s ease, opacity 0.3s ease;
+    will-change: border-width, opacity;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+    padding-top: 1rem;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+    display: block;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.6;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.time-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 1rem;
+}
+
+.day-counter {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    transition: opacity 0.5s ease;
+}
+
+.content-section.silent {
+    opacity: 0.2;
+}
+
+.quote-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.quote {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.music-section {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.music-label {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.music-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.3rem;
+}
+
+.music-artist {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    font-weight: 300;
+}
+
+.notes-section {
+    margin-top: 2rem;
+}
+
+#notes {
+    width: 100%;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#notes:focus {
+    border-color: var(--accent-color);
+}
+
+#notes::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.silence-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+}
+
+.silence-toggle:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.acknowledgment {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.acknowledgment.show {
+    opacity: 1;
+}
+
+/* About Page Styles */
+.about-main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content {
+    padding: 2rem 0;
+}
+
+.about-content h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 3rem;
+    letter-spacing: 0.5px;
+}
+
+.about-text {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+}
+
+.final-line {
+    font-style: italic;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.creator-section {
+    text-align: center;
+    margin: 4rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.creator-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid var(--border-color);
+}
+
+.creator-name {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.website-link {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.website-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.website-link a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .border-animation {
+        border-radius: 16px;
+    }
+    
+    .quote {
+        font-size: 1.2rem;
+    }
+    
+    .about-content h1 {
+        font-size: 2rem;
+    }
+    
+    .about-text {
+        font-size: 1rem;
+    }
+    
+    header {
+        margin-bottom: 2rem;
+    }
+    
+    .logo {
+        height: 112.5px;
+    }
+}
